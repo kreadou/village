@@ -1,0 +1,75 @@
+{% load static %}
+<header class="main-header">
+  <!-- Logo -->
+  <a href="{% url 'accueil:index' %}" class="logo">
+    <!-- mini logo for sidebar mini 50x50 pixels -->
+    <span class="logo-mini"><b>{{ societe.html_societe_court }}</b></span>
+    <!-- logo for regular state and mobile devices -->
+    <span class="logo-lg"><h5>{{ societe.html_societe_long }}</h5></span>
+  </a>
+  <!-- Header Navbar: style can be found in header.less -->
+  <nav class="navbar navbar-static-top">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <span class="sr-only">Toggle navigation</span>
+    </a>
+     	<!-- Collect the nav links, forms, and other content for toggling -->
+    
+    <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">APPLICATIONS <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            {% comment %}
+            <li><a href="{% url 'tableaubord:index' %}"><i class="fa fa-user" style="color:orange"></i> Tableau de bord</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{% url 'reglement:index' %}"><i class="fa fa-user" style="color:orange"></i> Règlements clients</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{% url 'reglement:paiement_list' %}"><i class="fa fa-user" style="color:orange"></i> Règlements fournisseurs</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{% url 'reglement:caisse_list' %}"><i class="fa fa-user" style="color:orange"></i> Opérations de caisse</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{% url 'facturation:index' %}"><i class="fa fa-user" style="color:orange"></i>Facturation</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{% url 'achat:index' %}"><i class="fa fa-user" style="color:orange"></i> Appros</a></li>
+            <li role="separator" class="divider"></li>
+            {% endcomment %}
+            <li><a href="{% url 'parametre:index' %}"><i class="fa fa-user" style="color:orange"></i> Paramétrage</a></li>
+            <li role="separator" class="divider"></li>
+            
+            <li><a href="{% url 'parametre:login' %}"><i class="fa fa-user" style="color:orange"></i>Déconnexion</a></li>
+          </ul>
+        </li>  
+      </ul>  
+    </div>    
+      
+    <div class="collapse navbar-collapse pull-right" id="navbar-collapse">
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown user user-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            {% if user.profil.photo %}
+            <img src="{{ MEDIA_URL }}{{ user.profil.photo.url }}" class="user-image" alt="User Image">
+            {% endif %}
+            <span class="hidden-xs">{{ user.last_name }}</span>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- User image -->
+            <li class="user-header">
+              {% if user.profil.photo %}
+              <img src="{{ MEDIA_URL }}{{ user.profil.photo.url }}" class="img-circle" alt="User Image">
+              {% endif %}
+              <p>{{ user.last_name }} - {{ user.profil.fonction }}<small></small></p>
+            </li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <li><a href="{% url 'accueil:index' %}">ACCUEIL</a></li>
+          <li><a href="{% url 'parametre:login' %}">LOGOUT</a></li>
+        </li>
+  		</ul>
+	  </div>
+
+	</nav>
+</header>

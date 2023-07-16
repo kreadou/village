@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block aside %}
+  {% include 'parametre/aside.html' %}
+{% endblock aside %}
+
+{% block content %}
+  <div>
+    <img src="{% static 'img/kfekko.png' %}" class="img-rectangle" width="100%" alt="User Image"> 
+  </div>
+{% endblock content %}

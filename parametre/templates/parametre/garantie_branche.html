@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+{% load crispy_forms_tags %}
+
+{% block aside %}
+  {% include "parametre/aside.html" %}        
+{% endblock aside %}    
+
+{% block header %}
+  {% include "parametre/header.html" %}        
+{% endblock header %}   
+
+{% block footer %}
+  {% include "parametre/footer.html" %}        
+{% endblock footer %}   
+
+{% block content %}    
+<section class="content-header">
+  <h1>Garanties liées aux Branches</h1>
+  <ol class="breadcrumb">
+    <a href="{% url 'parametre:index' %}"><span class="btn btn-xs btn-primary">Accueil</span></a>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title"><span class="label label-primary">Liste de toutes les garanties<span class="badge"></span></span></h3>
+        </div>
+       <div class="box-body">  
+          <p><i><b>
+            Cliquez sur les garanties de la branche sélectionnée.
+            </b></i>
+          </p>
+          <table id="table1" class="table table-bordered table-striped" cellspacing="10" style="width:100%">
+            <thead>
+              <tr bgcolor="#bee5eb">
+                  <th><input type="checkbox" class="taskCheckbox" name="checked1" id="ko" value=""</th>
+                  <th>Libellé</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in garantie_list %}
+                <tr>
+                  <td><input type="checkbox" class="taskCheckbox" name="checkedbox1" id="ok{{ forloop.counter }}" value="{{ i }}" onclick="transferer({{ i.id }})"></td>
+                  <td>{{ i.libelle }}</td>
+                </tr>  
+              {% endfor %}
+            </tbody>    
+            </table>
+           </form>
+        </div> 
+        </div> 
+     </div>
+
+    <div class="col-xs-6">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title"></h3>
+        </div>
+         <div class="box-body"> 
+          <p><i><b>
+            Cliquez sur les garanties pour les enlever de cette branche.
+            </b></i>
+          </p>
+          <div class="form-group row">
+
+            <label class="col-md-3 m-t-15">Branches</label>
+            <div class="col-md-9">
+              <select class="select2 form-control custom-select" id="id_branche_combo" style=" width: 80%; height:36px;">
+                <option value="-1">---- sélectionnez une branche ----</option>
+                {% for i in branche_list %}
+                  <option value="{{ i.id }}">{{ i.libelle }}</option>
+                {% endfor %}  
+              </select>
+            </div>
+          </div>
+
+       <form class="form" id="signup_form" method="post" action=""> {% csrf_token %} 
+           <table id="table2" class="table table-bordered table-striped" cellspacing="10" style="width:100%">
+            <thead>
+              <tr bgcolor="#bee5eb">
+                  <th><input type="checkbox" class="taskCheckbox" name="checked2" id="ko" value=""</th>
+                  <th>Garanties de la branche en cours</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody> 
+            </table>
+          </form>
+        </div> 
+        </div> 
+     </div>
+  </div>
+</section>  
+
+<script src="{% static 'js/jquery-3.5.1.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+
+<style type="text/css">
+  th, td {
+    white-space: nowrap;
+}
+</style>
+
+<script>
+  $(function () {
+    $('#table1').DataTable({
+      'paging'      : false,
+      'lengthChange': true,
+      "lengthMenu"  : [[20, -1], [20, "All"]],
+      'searching'   : false,
+      'ordering'    : false,
+      'info'        : false,
+      'autoWidth'   : true,
+      'scrollY'     : 450,
+      'scrollCollapse' : true,
+    });
+
+    $('#table2').DataTable({
+      'paging'      : false,
+      'lengthChange': true,
+      "lengthMenu"  : [[20, -1], [20, "All"]],
+      'searching'   : false,
+      'ordering'    : false,
+      'info'        : false,
+      'autoWidth'   : true,
+      'scrollY'     : 400,
+      'scrollCollapse' : true,
+    });
+  });
+
+  $('#id_branche_combo').change(function(){
+    var url = "remplir_garantie_branche";
+    var branche_id = parseInt($(this).val());
+    $.ajax({
+        url: url,
+        data: {
+          'branche_id': branche_id
+        },
+        success: function (data) {
+          $("#table2").html(data);
+          miseajour_garantie(branche_id)
+        }      
+      });
+    });
+
+  function miseajour_garantie(id){
+    var branche_id = id;
+    var url = "{% url 'parametre:miseajour_garantie' %}";
+    $.ajax({
+        url: url,
+        data: {'branche_id':branche_id },
+        success: function (data) {
+         $("#table1").html(data);
+        }
+      });
+    }
+
+
+function transferer(cpte){
+  var garantie_id = parseInt(cpte);
+  var branche_id = parseInt($('#id_branche_combo').val());
+  var url = "{% url 'parametre:transferer_garantie' %}";
+  $.ajax({
+      url: url,
+      data: {'garantie_id': garantie_id, 'branche_id':branche_id },
+      success: function (data) {
+       $("#table2").html(data);
+       miseajour_garantie(branche_id)
+      } 
+    });
+  }
+
+//
+//function suppression(cpte){
+//  var garantie_id = parseInt(cpte);
+//  var branche_id = parseInt($('#id_branche_combo').val());
+//  var url = "{% url 'parametre:supprimer_garantie' %}";/
+//$.ajax({
+//      url: url,
+//      data: {'garantie_id': garantie_id, 'branche_id':branche_id },
+//      success: function (data) {
+//       $("#table2").html(data);
+//    } 
+//  });
+//}
+</script>
+{% endblock %}
+

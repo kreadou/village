@@ -1,0 +1,166 @@
+{% load static %}
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                {% if user.profil.photo %}
+                    <img src="{{ MEDIA_URL }}{{ user.profil.photo.url }}" class="img-circle" alt="User Image">
+                {% endif %}
+            </div>
+            <div class="pull-left info">
+                <p>{{ user.last_name }}</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                {% if user.profil.fonction %}
+                <p><small>{{ user.profil.fonction }}</small></p>
+                {% endif %}
+            </div>
+        </div>
+        <!-- search form -->
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header" style="color:orange"><center><h4> ACCUEIL</h4></center></li>
+
+            <li>
+                <a href="{#% url 'tableaubord:index' %#}">
+                    <i class="fa fa-dashboard"></i> <span> Tableau de bord</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'adresse:afficher_list' %#}">
+                    <i class="fa fa-car"></i> <span> Parc Autos</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{#% url 'stock:index' %#}">
+                    <i class="fa fa-envelope teal-color"></i> <span> Stocks</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'parametre:index' %}">
+                    <i class="fa fa-settings teal-color"></i> <span> Paramètres</span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+
+
+    <style>
+    .blue-color {
+        color:blue;
+    }
+     
+    .green-color {
+        color:green;
+    }
+     
+    .teal-color {
+        color:teal;
+    }
+     
+    .yellow-color {
+    color:yellow;
+    }
+    
+    .red-color {
+        color:red;
+    }
+   </style>
+</aside>

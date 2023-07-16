@@ -1,0 +1,27 @@
+{% load static %}
+<table id="table1" class="table table-bordered table-striped" cellspacing="10" style="width:100%">
+	<tbody>
+	  {% for i in garantie_list %}
+	    <tr>
+	      <td><input type="checkbox" class="taskCheckbox" name="checkedbox" id="{{ i.id }}" value="{{ i.id }}" onclick="transferer({{ i.id }})"></td>
+	    <span><td>{{ i.libelle }}</td></span>
+	    </tr>  
+	  {% endfor %}
+	</tbody> 
+</table>
+
+<script src="{% static 'js/jquery-3.5.1.js' %}"></script>
+
+<script type="text/javascript">
+function transferer(cpte){
+  var garantie_id = parseInt(cpte);
+  var branche_id = parseInt($('#id_branche_combo').val());
+  var url = "{% url 'parametre:transferer_garantie' %}";
+  $.ajax({
+      url: url,
+      data: {'garantie_id': garantie_id, 'branche_id':branche_id },
+      success: function (data) {
+       $("#table2").html(data);
+    } 
+  });
+</script>
